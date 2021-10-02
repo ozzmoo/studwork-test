@@ -22,7 +22,6 @@ export default {
 
 body {
   background: rgb(145, 137, 135);
-  padding: 0px 30px;
 }
 
 #app {

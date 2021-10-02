@@ -1,18 +1,17 @@
 <template>
   <div class="ships">
+    <Header>
+      <template v-slot:search>
+        <label class="search"
+          >Найти корабль: <input type="text" v-model="search"
+        /></label>
+      </template>
+    </Header>
     <div class="ships-nav">
-      <button
-        class="ships-nav__item"
-        v-show="this.currentPage != 1"
-        @click="prevPage"
-      >
+      <button class="ships-nav__item" @click="prevPage" :disabled="!prev">
         Назад
       </button>
-      <button
-        class="ships-nav__item"
-        v-show="this.currentPage != 4"
-        @click="nextPage"
-      >
+      <button class="ships-nav__item" @click="nextPage" :disabled="!next">
         Вперед
       </button>
     </div>
@@ -28,35 +27,45 @@
 
 <script>
 import SmallCard from "@/components/SmallCard";
+import Header from "@/components/Header";
 import { getStarships } from "@/api/getStarships.js";
 
 export default {
   components: {
     SmallCard,
+    Header,
   },
   data() {
     return {
       starships: [],
-      currentPage: 1,
+      search: "",
     };
   },
   methods: {
-    async getStarships() {
-      const URL = `https://swapi.dev/api/starships/?page=${this.currentPage}`;
+    async getStarships(URL) {
       this.starships = await getStarships(URL);
     },
     nextPage() {
-      this.currentPage += 1;
-      this.getStarships();
+      if (this.next) {
+        this.getStarships(this.starships.next);
+      }
     },
     prevPage() {
-      this.currentPage =
-        this.currentPage == 1 ? this.currentPage : this.currentPage - 1;
-      this.getStarships();
+      if (this.prev) {
+        this.getStarships(this.starships.previous);
+      }
     },
   },
-  mounted() {
+  created() {
     this.getStarships();
+  },
+  computed: {
+    prev() {
+      return this.starships.previous != null;
+    },
+    next() {
+      return this.starships.next != null;
+    },
   },
 };
 </script>
@@ -84,5 +93,9 @@ export default {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.search {
+  color: white;
 }
 </style>
