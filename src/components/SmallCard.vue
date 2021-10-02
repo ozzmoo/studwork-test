@@ -48,13 +48,21 @@ export default {
 <style>
 .card {
   max-width: 300px;
-  padding: 10px 15px;
+  padding: 10px 15px 80px;
 
   background: #22251c;
   box-shadow: 0px 0px 17px 0px rgba(34, 60, 80, 0.2);
   border-radius: 10px;
 
   color: rgb(233, 233, 233);
+  cursor: pointer;
+
+  transition: 0.5s;
+}
+
+.card:hover {
+  box-shadow: 0px 0px 17px 0px rgba(240, 240, 240, 0.507);
+  transform: scale(1.01);
 }
 
 .card__head {
@@ -63,6 +71,10 @@ export default {
   align-items: center;
 }
 
+.card__title {
+  font-size: 18px;
+  text-align: right;
+}
 .card__logo {
   width: 80px;
 }
@@ -76,7 +88,7 @@ export default {
 }
 
 .card-stats {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .stats-item {

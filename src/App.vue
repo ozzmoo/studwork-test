@@ -25,6 +25,7 @@ body {
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
   height: 100vh;
+  padding: 0px 30px;
 }
 
 @keyframes gradient {

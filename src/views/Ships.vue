@@ -31,3 +31,17 @@ export default {
   },
 };
 </script>
+
+<style>
+.cards-wrap {
+  margin: 20px auto;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 350px);
+  gap: 10px;
+
+  justify-content: center;
+  justify-items: center;
+}
+</style>
