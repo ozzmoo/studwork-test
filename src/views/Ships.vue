@@ -1,10 +1,28 @@
 <template>
-  <div class="cards-wrap">
-    <SmallCard
-      v-for="(ship, i) in starships.results"
-      :key="i"
-      :shipData="ship"
-    />
+  <div class="ships">
+    <div class="ships-nav">
+      <button
+        class="ships-nav__item"
+        v-show="this.currentPage != 1"
+        @click="prevPage"
+      >
+        Назад
+      </button>
+      <button
+        class="ships-nav__item"
+        v-show="this.currentPage != 4"
+        @click="nextPage"
+      >
+        Вперед
+      </button>
+    </div>
+    <div class="ships-wrap">
+      <SmallCard
+        v-for="(ship, i) in starships.results"
+        :key="i"
+        :shipData="ship"
+      />
+    </div>
   </div>
 </template>
 
@@ -18,12 +36,23 @@ export default {
   },
   data() {
     return {
-      starships: null,
+      starships: [],
+      currentPage: 1,
     };
   },
   methods: {
     async getStarships() {
-      this.starships = await getStarships();
+      const URL = `https://swapi.dev/api/starships/?page=${this.currentPage}`;
+      this.starships = await getStarships(URL);
+    },
+    nextPage() {
+      this.currentPage += 1;
+      this.getStarships();
+    },
+    prevPage() {
+      this.currentPage =
+        this.currentPage == 1 ? this.currentPage : this.currentPage - 1;
+      this.getStarships();
     },
   },
   mounted() {
@@ -33,7 +62,7 @@ export default {
 </script>
 
 <style>
-.cards-wrap {
+.ships-wrap {
   margin: 20px auto;
   width: 100%;
 
@@ -43,5 +72,17 @@ export default {
 
   justify-content: center;
   justify-items: center;
+}
+
+.ships-nav {
+  padding: 10px 0px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.ships-nav__item {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 </style>

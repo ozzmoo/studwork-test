@@ -21,23 +21,8 @@ export default {
 }
 
 body {
-  background: linear-gradient(-45deg, #f5ed17, #cd3727, #1b4489, #000000);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
-  height: 100vh;
+  background: rgb(145, 137, 135);
   padding: 0px 30px;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 #app {

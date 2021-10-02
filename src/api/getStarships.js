@@ -1,5 +1,5 @@
-export const getStarships = async () => {
-  const res = await fetch("https://swapi.dev/api/starships");
+export const getStarships = async (url = "https://swapi.dev/api/starships") => {
+  const res = await fetch(url);
   const starships = await res.json();
   return starships;
 }

@@ -37,9 +37,12 @@ export default {
       const cost =
         this.shipData.cost_in_credits === "unknown"
           ? "не известно"
-          : `${this.shipData.cost_in_credits} кред.`;
+          : `${this.parsedCost} кред.`;
 
       return cost;
+    },
+    parsedCost() {
+      return parseInt(this.shipData.cost_in_credits).toLocaleString();
     },
   },
 };
@@ -100,5 +103,12 @@ export default {
   align-items: center;
 
   font-size: 14px;
+}
+
+.stats-item__key {
+  text-align: left;
+}
+.stats-item__value {
+  text-align: right;
 }
 </style>
