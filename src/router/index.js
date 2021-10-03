@@ -1,15 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-/* import Home from '../views/Home.vue' */
+import Ships from '../views/Ships.vue'
+import Starship from '../views/Starship.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
-  /*   {
+const routes = [{
     path: '/',
-    name: 'Home',
-    component: Home
-  } */
+    name: 'Ships',
+    component: Ships
+  },
+  {
+    path: '/:name',
+    name: 'Starship',
+    component: Starship
+  }
 ]
 
 const router = new VueRouter({

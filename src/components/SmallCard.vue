@@ -22,6 +22,16 @@
         <span class="stats-item__value"> {{ shipData.model }}</span>
       </div>
     </div>
+    <router-link
+      class="card__link"
+      :to="{
+        name: 'Starship',
+        params: { name: shipData.name, data: shipData },
+      }"
+      :data="shipData"
+    >
+      Читать далее
+    </router-link>
   </div>
 </template>
 
@@ -51,7 +61,10 @@ export default {
 <style>
 .card {
   max-width: 300px;
-  padding: 10px 15px 80px;
+  padding: 10px 15px 60px;
+
+  display: flex;
+  flex-direction: column;
 
   background: #22251c;
   box-shadow: 0px 0px 17px 0px rgba(34, 60, 80, 0.2);
@@ -88,6 +101,14 @@ export default {
   border: 3px solid gray;
   border-radius: 10px;
   box-shadow: 0px 0px 5px 0px rgba(214, 226, 235, 0.801);
+}
+
+.card__link {
+  color: #ffffff;
+  display: block;
+
+  align-self: end;
+  margin-top: 20px;
 }
 
 .card-stats {

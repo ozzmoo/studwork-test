@@ -1,18 +1,8 @@
 <template>
   <div id="app">
-    <Ships />
     <router-view />
   </div>
 </template>
-
-<script>
-import Ships from "./views/Ships";
-export default {
-  components: {
-    Ships,
-  },
-};
-</script>
 
 <style>
 * {
