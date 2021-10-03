@@ -1,5 +1,7 @@
 # studwork-test
 
+Демо: [https://studwork.surge.sh/](https://studwork.surge.sh/)
+
 ## Project setup
 ```
 npm install
