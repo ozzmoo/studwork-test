@@ -2,8 +2,10 @@
   <div class="ships">
     <Header>
       <template v-slot:search>
-        <label class="search"
-          >Найти корабль: <input type="text" v-model="search"
+        <label class="search">
+          Найти корабль:
+          <input type="text" v-model="search" />
+          <input type="button" value="Найти" @click="searchShip"
         /></label>
       </template>
     </Header>
@@ -55,10 +57,28 @@ export default {
         this.getStarships(this.starships.previous);
       }
     },
+    async searchShip() {
+      const URL = `https://swapi.dev/api/starships/?search=${this.search}`;
+      this.getStarships(URL);
+      this.$router.push({ path: "/", query: { search: this.search } });
+    },
+    getQueryFromUrl() {
+      const urlSearchParams = new URLSearchParams(window.location.search);
+      const params = Object.fromEntries(urlSearchParams.entries());
+      return params;
+    },
   },
   created() {
-    this.getStarships();
+    const searchQuery = this.getQueryFromUrl()?.search;
+    if (searchQuery) {
+      this.getStarships(
+        `https://swapi.dev/api/starships/?search=${searchQuery}`
+      );
+    } else {
+      this.getStarships();
+    }
   },
+  mounted() {},
   computed: {
     prev() {
       return this.starships.previous != null;
